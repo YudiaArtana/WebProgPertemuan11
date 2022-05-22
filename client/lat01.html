@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Latihan JavaScript</title>
+</head>
+<body>
+
+    <div id="konten"></div>
+    
+    <script>
+        const jsonData = new XMLHttpRequest()
+        
+        setInterval(function(){
+            jsonData.open("GET","../server/lat01.php")
+            jsonData.send()
+        },2000)
+
+        jsonData.onload = function(){
+            const myData = JSON.parse(this.responseText)
+            console.log(myData)
+
+            let hasil = "Daftar Buah-Buahan";
+            hasil += "<ul>"
+            for(i=0; i<myData.length; i++){
+                hasil += "<li>"+myData[i]+"</li>"
+            }
+            hasil += "<ul>"
+
+            document.getElementById("konten").innerHTML = hasil
+
+        }
+    </script>
+
+</body>
+</html>
